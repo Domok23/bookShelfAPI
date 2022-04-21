@@ -11,20 +11,20 @@ const addBookHandler = (request, h) => {
   const id = nanoid(16);
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
-  let finishied = false;
+  let finished = false;
 
   if (readPage === pageCount) {
-    finishied = true;
+    finished = true;
   }
 
   if (reading === true) {
-    finishied = false;
+    finished = false;
   }
 
   if (name === undefined) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan buku. Nama tidak boleh kosong',
+      message: 'Gagal menambahkan buku. Mohon isi nama buku',
     });
     response.code(400);
     return response;
@@ -33,7 +33,7 @@ const addBookHandler = (request, h) => {
   if (readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan buku. Jumlah halaman yang dibaca tidak boleh lebih besar dari jumlah halaman buku',
+      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
@@ -48,7 +48,7 @@ const addBookHandler = (request, h) => {
     publisher,
     pageCount,
     readPage,
-    finishied,
+    finished,
     reading,
     insertedAt,
     updatedAt,
@@ -133,20 +133,20 @@ const editBookByIdHandler = (request, h) => {
 
   const updatedAt = new Date().toISOString();
   const index = books.findIndex((book) => book.id === id);
-  let finishied = false;
+  let finished = false;
 
   if (readPage === pageCount) {
-    finishied = true;
+    finished = true;
   }
 
   if (reading === true) {
-    finishied = false;
+    finished = false;
   }
 
   if (name === undefined) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal mengubah buku. Nama tidak boleh kosong',
+      message: 'Gagal memperbarui buku. Mohon isi nama buku',
     });
     response.code(400);
     return response;
@@ -155,7 +155,7 @@ const editBookByIdHandler = (request, h) => {
   if (readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal mengubah buku. Jumlah halaman yang dibaca tidak boleh lebih besar dari jumlah halaman buku',
+      message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
@@ -171,7 +171,7 @@ const editBookByIdHandler = (request, h) => {
       publisher,
       pageCount,
       readPage,
-      finishied,
+      finished,
       reading,
       updatedAt,
     };
@@ -186,7 +186,7 @@ const editBookByIdHandler = (request, h) => {
 
   const response = h.response({
     status: 'fail',
-    message: 'Buku gagal perbaharui. Id tidak ditemukan',
+    message: 'Gagal memperbarui buku. Id tidak ditemukan',
   });
   response.code(404);
   return response;
