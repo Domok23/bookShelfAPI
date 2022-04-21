@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable object-curly-newline */
+/* eslint-disable linebreak-style */
 const { addBookHandler, getAllBooksHandler, getBookByIdHandler, editBookByIdHandler, deleteBookByIdHandler } = require('./handler');
 
 const routes = [
